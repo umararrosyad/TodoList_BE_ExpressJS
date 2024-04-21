@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     task_name: DataTypes.STRING,
     description: DataTypes.TEXT,
     time: DataTypes.DATE,
-    priority: DataTypes.INTEGER,
+    priority: DataTypes.STRING,
     category_id: DataTypes.INTEGER,
     completed: DataTypes.BOOLEAN
   }, {

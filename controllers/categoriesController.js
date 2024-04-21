@@ -3,7 +3,8 @@ const { Category } = require("../models");
 class categoryController {
   static async getAll(req, res, next) {
     try {
-      let data = await Category.findAll();
+      const { user_id } = req.params;
+      let data = await Category.findAll({ where: { user_id } });
       if (!data[0]) {
         throw { name: "notFound" };
       }
@@ -20,7 +21,7 @@ class categoryController {
   static async getOne(req, res, next) {
     try {
       const { id } = req.params;
-      let data = await product_galleries.findByPk(id);
+      let data = await Category.findByPk(id);
       if (!data) {
         throw { name: "notFound" };
       }
@@ -53,11 +54,15 @@ class categoryController {
     try {
       const { id } = req.params;
       const { category_name } = req.body;
-      const data = await Category.update({ category_name }, {where : {id}});
+      const data = await Category.update({ category_name }, { where: { id } });
+      let dataupdate;
+      if (data[0] == 1) {
+        dataupdate = await Category.findByPk(id);
+      }
       res.status(200).json({
         status: "success",
-        message: "Data berhasil dibuat.",
-        data
+        message: "Data berhasil diedit.",
+        dataupdate
       });
     } catch (error) {
       next(error);

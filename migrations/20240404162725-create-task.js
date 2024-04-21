@@ -22,7 +22,7 @@ module.exports = {
         type: Sequelize.DATE
       },
       priority: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       category_id: {
         type: Sequelize.INTEGER
